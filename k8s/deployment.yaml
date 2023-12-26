@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ape-staff-deployment
+  labels:
+    app: ape-staff-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ape-staff
+  template:
+    metadata:
+      labels:
+        app: ape-staff
+    spec:
+      containers:
+        - image: jansuklje/ape-staff-service:latest
+          name: ape-staff
+          env:
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              valueFrom:
+                secretKeyRef:
+                  name: database-secret-url
+                  key: url
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: database-secret-username
+                  key: username
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-secret-password
+                  key: password
+          ports:
+            - containerPort: 8080

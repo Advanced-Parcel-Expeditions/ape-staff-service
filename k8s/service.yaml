@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ape-staff-service
+spec:
+  selector:
+    app: ape-staff
+  ports:
+    - port: 8080
