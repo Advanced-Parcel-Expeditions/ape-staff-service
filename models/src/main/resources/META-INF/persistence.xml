@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
     <persistence-unit name="ape-staff-jpa" transaction-type="RESOURCE_LOCAL">
-        <non-jta-data-source>jdbc/APEParcelDS</non-jta-data-source>
+        <non-jta-data-source>jdbc/APEStaffDS</non-jta-data-source>
 
         <class>si.ape.staff.models.entities.BranchEntity</class>
         <class>si.ape.staff.models.entities.BranchTypeEntity</class>
