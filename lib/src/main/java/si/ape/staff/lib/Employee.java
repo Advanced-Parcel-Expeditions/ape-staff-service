@@ -1,6 +1,6 @@
 package si.ape.staff.lib;
 
-public class Customer {
+public class Employee {
 
     private Integer id;
 
@@ -8,11 +8,7 @@ public class Customer {
 
     private String surname;
 
-    private String companyName;
-
-    private String telNum;
-
-    private Street street;
+    private Branch branch;
 
     private User user;
 
@@ -40,28 +36,12 @@ public class Customer {
         this.surname = surname;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public Branch getBranch() {
+        return branch;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getTelNum() {
-        return telNum;
-    }
-
-    public void setTelNum(String telNum) {
-        this.telNum = telNum;
-    }
-
-    public Street getStreet() {
-        return street;
-    }
-
-    public void setStreet(Street street) {
-        this.street = street;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     public User getUser() {
@@ -71,4 +51,5 @@ public class Customer {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
