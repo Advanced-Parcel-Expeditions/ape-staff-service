@@ -105,14 +105,14 @@ public class StaffResource {
         return Response.ok(employees).build();
     }
 
-    @Operation(description = "Get employees with role at branch.", summary = "Get employees with role")
+    @Operation(description = "Get branches with name similar to search string.", summary = "Get similar branches")
     @APIResponses({
             @APIResponse(responseCode = "200",
-                    description = "Employees are delivered.",
+                    description = "Branches are delivered.",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = Employee.class))
             ),
-            @APIResponse(responseCode = "404", description = "Employees not found .")
+            @APIResponse(responseCode = "404", description = "Branches not found.")
     })
     @GET
     @Path("/branches/{name}")
