@@ -7,7 +7,10 @@ import javax.persistence.*;
 @NamedQueries(value =
         {
             @NamedQuery(name = "BranchEntity.getAll",
-                query = "SELECT b FROM BranchEntity b")
+                query = "SELECT b FROM BranchEntity b"),
+            @NamedQuery(name = "BranchEntity.getBranchesWithSimilarName",
+                query = "SELECT b FROM BranchEntity b WHERE LOWER(b.name) LIKE LOWER(:name)"),
+
         })
 public class BranchEntity {
 

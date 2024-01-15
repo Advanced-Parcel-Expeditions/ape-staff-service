@@ -1,6 +1,8 @@
 package si.ape.staff.services.beans;
 
+import si.ape.staff.lib.Branch;
 import si.ape.staff.lib.Employee;
+import si.ape.staff.models.converters.BranchConverter;
 import si.ape.staff.models.converters.EmployeeConverter;
 import si.ape.staff.models.entities.BranchEntity;
 import si.ape.staff.models.entities.EmployeeEntity;
@@ -51,7 +53,14 @@ public class StaffBean {
         return employeeEntities.stream().map(EmployeeConverter::toDto).collect(java.util.stream.Collectors.toList());
     }
 
-    public Employee moveEmployee(Integer employeeId, Integer branchId) {
+    public List<Branch> getBranchesWithSimilarName(String name) {
+        TypedQuery<BranchEntity> query = em.createNamedQuery("BranchEntity.getBranchesWithSimilarName", BranchEntity.class);
+        query.setParameter("name", "%" + name + "%");
+        List<BranchEntity> branchEntities = query.getResultList();
+        return branchEntities.stream().map(BranchConverter::toDto).collect(java.util.stream.Collectors.toList());
+    }
+
+    /*public Employee moveEmployee(Integer employeeId, Integer branchId) {
         beginTx();
         EmployeeEntity employee = em.find(EmployeeEntity.class, employeeId);
         try {
@@ -67,7 +76,7 @@ public class StaffBean {
         }
         commitTx();
         return EmployeeConverter.toDto(employee);
-    }
+    }*/
 
 
     private void beginTx() {

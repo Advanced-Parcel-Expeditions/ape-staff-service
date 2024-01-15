@@ -105,7 +105,30 @@ public class StaffResource {
         return Response.ok(employees).build();
     }
 
-    @Operation(description = "Move employee to branch.", summary = "Move employee")
+    @Operation(description = "Get employees with role at branch.", summary = "Get employees with role")
+    @APIResponses({
+            @APIResponse(responseCode = "200",
+                    description = "Employees are delivered.",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = Employee.class))
+            ),
+            @APIResponse(responseCode = "404", description = "Employees not found .")
+    })
+    @GET
+    @Path("/branches/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBranchesWithSimilarName(@Parameter(description = "Branch ID.", required = true) @PathParam("name") String name) {
+
+        List<Branch> employees = staffBean.getBranchesWithSimilarName(name);
+
+        if (employees == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        return Response.ok(employees).build();
+    }
+
+    /*@Operation(description = "Move employee to branch.", summary = "Move employee")
     @APIResponses({
             @APIResponse(responseCode = "200",
                     description = "Employee is moved.",
@@ -127,6 +150,6 @@ public class StaffResource {
         }
 
         return Response.ok(employee).build();
-    }
+    }*/
 
 }
