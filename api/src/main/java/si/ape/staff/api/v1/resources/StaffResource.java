@@ -9,6 +9,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import si.ape.staff.services.beans.StaffBean;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -25,6 +27,8 @@ import si.ape.staff.lib.*;
 @Path("/staff")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@DeclareRoles({"Administrator", "Warehouse manager", "Warehouse agent", "Delivery driver", "International driver",
+        "Logistics agent", "Order confirmation specialist", "Customer"})
 public class StaffResource {
 
     private final Logger log = Logger.getLogger(StaffResource.class.getName());
@@ -48,6 +52,8 @@ public class StaffResource {
     @GET
     @Path("/{employeeId}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Administrator", "Warehouse manager", "Warehouse agent", "Delivery driver", "International driver",
+            "Logistics agent", "Order confirmation specialist"})
     public Response getEmployee(@Parameter(description = "Employee ID.", required = true) @PathParam("employeeId") Integer employeeId) {
 
         Employee employee = staffBean.getEmployee(employeeId);
@@ -70,6 +76,8 @@ public class StaffResource {
     })
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Administrator", "Warehouse manager", "Warehouse agent", "Delivery driver", "International driver",
+            "Logistics agent", "Order confirmation specialist"})
     public Response getEmployees(@Parameter(description = "Branch ID.", required = true) @QueryParam("branchId") Integer branchId) {
 
         List<Employee> employees = staffBean.getEmployeesAtBranch(branchId);
@@ -93,6 +101,8 @@ public class StaffResource {
     @GET
     @Path("/with-role")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Administrator", "Warehouse manager", "Warehouse agent", "Delivery driver", "International driver",
+            "Logistics agent", "Order confirmation specialist"})
     public Response getEmployeesWithRole(@Parameter(description = "Branch ID.", required = true) @QueryParam("branchId") Integer branchId,
                                          @Parameter(description = "Role ID.", required = true) @QueryParam("roleId") Integer roleId) {
 
@@ -117,6 +127,8 @@ public class StaffResource {
     @GET
     @Path("/branches/{name}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Administrator", "Warehouse manager", "Warehouse agent", "Delivery driver", "International driver",
+            "Logistics agent", "Order confirmation specialist"})
     public Response getBranchesWithSimilarName(@Parameter(description = "Branch ID.", required = true) @PathParam("name") String name) {
 
         List<Branch> employees = staffBean.getBranchesWithSimilarName(name);
